@@ -13,6 +13,7 @@ public class LimelightMap {
     private boolean allClearDistance;
     public boolean isTargetVisible() {
      return visibility == 1;
+// this turns the number into a variable
     }
 
     public void updatelimelight() {
