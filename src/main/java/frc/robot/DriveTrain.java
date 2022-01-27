@@ -43,11 +43,12 @@ public class DriveTrain {
     }
 
     public void straferight(){
-        frontStrafe.set(ControlMode.PercentOutput, -0.5);
+        frontStrafe.set(ControlMode.PercentOutput, 0.5);
         backStrafe.set(ControlMode.PercentOutput, -0.5);
+        
     }
     public void strafeleft(){
-        frontStrafe.set(ControlMode.PercentOutput, 0.5);
+        frontStrafe.set(ControlMode.PercentOutput, -0.5);
         backStrafe.set(ControlMode.PercentOutput, 0.5);
     }
     public void stopstrafe(){

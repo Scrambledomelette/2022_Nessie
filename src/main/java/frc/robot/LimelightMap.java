@@ -6,6 +6,11 @@ public class LimelightMap {
     private double yAxis;
     private double xAxis;
     private double visibility;
+    private double distance;
+    private double goalAngle;
+    private double hypotenuseAngle;
+    private boolean allClearAxis;
+    private boolean allClearDistance;
     public boolean isTargetVisible() {
      return visibility == 1;
     }
@@ -17,17 +22,15 @@ public class LimelightMap {
          if (visibility == 1){
             xAxis = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
            }
-     
-    //The rest is just calculations written by my monke brain
-         double goalHeight = 269.24; 
-         double cameraHeight = 97;
-         double mountedAngle = 45;
-         double goalAngle = yAxis + 20;
-
-
-         double tanAngle = Math.tan(mountedAngle + goalAngle);
-         double oppositeAnlgeHeight = goalHeight - cameraHeight;
-         double robotDistanceFromGoal = oppositeAnlgeHeight / tanAngle;
+    }
+    public void updateDistance() {
+        double goalHeight = 267; 
+        double cameraHeight = 97;
+        double mountedAngle = 45;
+        goalAngle = yAxis;    
+        hypotenuseAngle = Math.tan(Math.toRadians(mountedAngle + goalAngle));
+        double oppositeAnlgeHeight = goalHeight - cameraHeight;
+        distance = oppositeAnlgeHeight / hypotenuseAngle;
     }
 
     // use to get the axis in other classes or something, idk lol
@@ -39,22 +42,48 @@ public class LimelightMap {
         return yAxis;
     }
   //This belongs in the drivetrain but im writing this in a different robot so nope kekw
-    public void driveToAllignShot() {
+    
+  public void driveToAllignShot() {
         updatelimelight();    
-
-        if (xAxis > 1) {
+        checkYourNuts();
+        if (xAxis > 2) {
             DriveTrain.leftDrive.set(0.3);
             DriveTrain.rightDrive.set(0.3);
             System.out.println("this is the X axis" + xAxis);
         }
-        else if (xAxis < -1) {
+        else if (xAxis < -2) {
             DriveTrain.leftDrive.set(-0.3);
             DriveTrain.rightDrive.set(-0.3);
             System.out.println("this is the X axis" + xAxis);
         }
         else {
-            System.out.println("ROCK AND STONE BRUDDA" + xAxis);
+            allClearAxis = true;
         }
     }
+    public void driveToAllignDistance() {
+        updatelimelight();
+        updateDistance();
+        checkYourNuts();
+        if (distance < 200) {
+            DriveTrain.leftDrive.set(-0.3);
+            DriveTrain.rightDrive.set(0.3);
+            System.out.println(distance);
+        } else if (distance > 215) {
+            DriveTrain.leftDrive.set(0.3);
+            DriveTrain.rightDrive.set(-0.3);
+            System.out.println(distance);
+        } else {
+            allClearDistance = true;
+        }
+    }
+
+    private void checkYourNuts() {
+        if (allClearAxis = true) {
+            if (allClearDistance = true) {
+                System.out.println("ROCK AND STONE");
+            }
+        }
+    }
+    
 }
 

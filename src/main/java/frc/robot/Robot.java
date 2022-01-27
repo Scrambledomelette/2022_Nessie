@@ -104,7 +104,7 @@ public class Robot extends TimedRobot {
     controller.periodic();
 
     if (controller.getstrafe()){
-      // driveTrain.strafe();
+       driveTrain.strafe();
       driveTrain.strafing(controller.getLeftPercentage());
       System.out.println("nuts");
        if(controller.getstrafeleft()){
@@ -121,10 +121,17 @@ public class Robot extends TimedRobot {
        }
     }
     else{
-      // driveTrain.destrafe();
+       driveTrain.destrafe();
       driveTrain.drive(controller.getRightPercentage(), controller.getLeftPercentage());
     }
     if (controller.getAllignStart()){
+      goalMap.driveToAllignShot();
+    }
+    if (controller.getallignDistance()){
+      goalMap.driveToAllignDistance();
+    }
+    if (controller.allignAndFire()){
+      goalMap.driveToAllignDistance();
       goalMap.driveToAllignShot();
     }
     if (controller.getraisedlift()){

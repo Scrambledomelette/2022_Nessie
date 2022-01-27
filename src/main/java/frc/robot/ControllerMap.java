@@ -14,7 +14,9 @@ public class ControllerMap {
     private boolean holdstrafe;
     private boolean raiselift;
     private boolean lowerlift;
-    public boolean allignrobot;
+    private boolean allignrobot;
+    private boolean alligndistance;
+    private boolean allignandfire;
     
     public ControllerMap() {
         joystickleft = new Joystick(0);
@@ -34,7 +36,9 @@ public class ControllerMap {
     }
 
     private void checkAllControls() {
-        allignrobot = joystickright.getRawButton(2);
+        allignrobot = joystickright.getRawButton(3);
+        alligndistance = joystickright.getRawButton(4);
+        allignandfire = joystickright.getRawButton(2);
         togglestrafe = joystickleft.getRawButtonPressed(2);
         strafeleft = joystickleft.getRawButton(3);
         straferight = joystickright.getRawButton(4);
@@ -81,6 +85,12 @@ public class ControllerMap {
     }
     public boolean getAllignStart() {
         return allignrobot;
+    }
+    public boolean getallignDistance(){
+        return alligndistance;
+    }
+    public boolean allignAndFire(){
+        return allignandfire;
     }
 
 }
